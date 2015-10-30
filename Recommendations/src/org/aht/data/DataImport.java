@@ -46,11 +46,11 @@ public class DataImport {
         }
     }
 
-    public void createRelationshipsDishesAndCategories(String dishes_categories, Connection con) {
+    public void createRelationshipsDishesAndCategories(String file_url, Connection con) {
         try(Statement stmt = con.createStatement())
         {
             ResultSet rs = stmt.executeQuery("USING PERIODIC COMMIT\n" +
-                    "LOAD CSV WITH HEADERS FROM \""+dishes_categories+"\" AS row MATCH (dish:Dish {dishID: toInt(row.dish_id)}) MATCH (category:Category {categoryID: toInt(row.category_id)}) MERGE (dish)-[:IS]->(category);");
+                    "LOAD CSV WITH HEADERS FROM \""+file_url+"\" AS row MATCH (dish:Dish {dishID: toInt(row.dish_id)}) MATCH (category:Category {categoryID: toInt(row.category_id)}) MERGE (dish)-[:IS]->(category);\n");
         } catch (SQLException e) {
             e.printStackTrace();
         }
