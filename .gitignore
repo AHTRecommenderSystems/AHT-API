@@ -33,3 +33,4 @@ dist/
 manifest.mf
 build/
 build.xml
+target/
