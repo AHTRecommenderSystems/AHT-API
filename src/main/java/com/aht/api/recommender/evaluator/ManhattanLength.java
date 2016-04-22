@@ -22,7 +22,7 @@ public class ManhattanLength implements Evaluator{
      * @param secondItem
      * @return int evaluation
      */
-    @Override
+
     public Object getEvaluationForItems(Item firstItem, Item secondItem) {
         Vector vector1 = new Vector(getCharacteristicsVector(firstItem));
         Vector vector2 = new Vector(getCharacteristicsVector(secondItem));
@@ -47,7 +47,6 @@ public class ManhattanLength implements Evaluator{
      * @param secondUser
      * @return int evaluation
      */
-    @Override
     public Object getEvaluationForUsers(User firstUser, User secondUser){
         // TODO: get events from each user
         // TODO: Compare items each user has interacted with

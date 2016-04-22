@@ -1,4 +1,4 @@
-package com.aht.neo4j;
+package com.aht.api;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

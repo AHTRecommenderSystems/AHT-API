@@ -55,9 +55,8 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>com.aht.api</groupId>
-				<artifactId>aht-recommender-systems-api</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
