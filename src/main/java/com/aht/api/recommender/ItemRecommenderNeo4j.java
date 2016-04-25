@@ -1,21 +1,18 @@
 package com.aht.api.recommender;
 
+import java.util.Set;
+import java.util.HashSet;
 import com.aht.api.model.node.Item;
 import com.aht.api.model.node.User;
-import com.aht.api.model.relationship.Affinity;
 import com.aht.api.model.relationship.Event;
+import com.aht.api.model.relationship.Affinity;
 import com.aht.api.model.relationship.Neighbor;
 
-import java.util.*;
-
-/**
- * Created by azu on 18/04/16.
- */
 
 public class ItemRecommenderNeo4j implements ItemRecommender{
     public Set<Item> getTopNRecommendationByItem(Item item, int N) {
         Set<Item> topNRecommendations = new HashSet<Item>();
-        Set<Affinity> affinities = item.getAffinities();
+        Set<Affinity> affinities = item.getModelAffinities();
         // Sort Affinities
 
         for (Affinity affinity: affinities) {
@@ -29,7 +26,7 @@ public class ItemRecommenderNeo4j implements ItemRecommender{
     }
 
     public Set<Item> getTopNRecommendationByUSer(User user, int N) {
-        Set<Neighbor> neighbors = user.getNeighbors();
+        Set<Neighbor> neighbors = user.getModelNeighbors();
         // Sort Affinities
 
         Set<User> users = new HashSet<User>();
@@ -44,7 +41,7 @@ public class ItemRecommenderNeo4j implements ItemRecommender{
         Set<Item> topNRecommendations = new HashSet<Item>();
         for(User u: users){
             // getList of items by user event sorted by value
-            Set<Event> events = u.getEvents();
+            Set<Event> events = u.getModelEvents();
             for(Event e: events){
                 Item temp = e.getItem();
                 topNRecommendations.add(temp);
