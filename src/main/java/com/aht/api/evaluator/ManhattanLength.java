@@ -29,6 +29,15 @@ public class ManhattanLength {
         for(int i=0; i < normalized1.length; i++){
             distance += Math.abs(normalized1[i] - normalized2[i]);
         }
+        
+        // normalized1.length & normalized2.length are aquals
+        double euclidean_distance = 0; 
+        for(int i = 0; i < normalized1.length; i++) 
+        	euclidean_distance += (normalized1[i] - normalized2[i]) * (normalized1[i] - normalized2[i]);
+        euclidean_distance = Math.sqrt(euclidean_distance);
+
+        
+        
         double result = ((double)both.size() - (double) distance) / (double) both.size();
         System.out.println("Distancia entre los dos: " + result);
         return result;
