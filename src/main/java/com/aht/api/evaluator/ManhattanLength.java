@@ -1,9 +1,9 @@
-package com.aht.api.recommender.evaluator;
+package com.aht.api.evaluator;
 
 import com.aht.api.model.node.Characteristic;
 import com.aht.api.model.node.Item;
 import com.aht.api.model.node.User;
-import com.aht.api.recommender.dataStructure.Vector;
+import com.aht.api.evaluator.dataStructure.Vector;
 
 import java.util.*;
 
@@ -35,8 +35,8 @@ public class ManhattanLength implements Evaluator{
                 common += 1;
             }
         }
-        //double result = (double) common / (double) both.size();
-        int result = both.size() - common;
+        double result = ((double)both.size() - (double) common) / (double) both.size();
+        // int result = both.size() - common;
         System.out.println("Distancia entre los dos: " + result);
         return result;
     }

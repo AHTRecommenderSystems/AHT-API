@@ -1,4 +1,4 @@
-package com.aht.api.recommender.evaluator;
+package com.aht.api.evaluator;
 
 import com.aht.api.model.node.Item;
 import com.aht.api.model.node.User;

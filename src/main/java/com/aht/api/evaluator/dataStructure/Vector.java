@@ -1,4 +1,4 @@
-package com.aht.api.recommender.dataStructure;
+package com.aht.api.evaluator.dataStructure;
 
 import org.apache.commons.lang.ArrayUtils;
 
