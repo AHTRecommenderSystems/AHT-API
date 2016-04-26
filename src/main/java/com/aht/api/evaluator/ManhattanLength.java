@@ -23,16 +23,13 @@ public class ManhattanLength {
         Vector vector1 = new Vector(getCharacteristicsVector(firstItem));
         Vector vector2 = new Vector(getCharacteristicsVector(secondItem));
         Vector both = new Vector(vector1.merge(vector2));
-        System.out.println(vector1 + "\n" + vector2);
-        System.out.println(both);
-        int common = 0;
-        for(Object value : vector1.getVector()){
-            if(vector2.includes(value)){
-                common += 1;
-            }
+        double[] normalized1 = vector1.normalize(both);
+        double[] normalized2 = vector2.normalize(both);
+        int distance = 0;
+        for(int i=0; i < normalized1.length; i++){
+            distance += Math.abs(normalized1[i] - normalized2[i]);
         }
-        double result = ((double)both.size() - (double) common) / (double) both.size();
-        // int result = both.size() - common;
+        double result = ((double)both.size() - (double) distance) / (double) both.size();
         System.out.println("Distancia entre los dos: " + result);
         return result;
     }

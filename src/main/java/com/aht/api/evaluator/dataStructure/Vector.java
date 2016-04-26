@@ -7,6 +7,30 @@ import org.apache.commons.lang.ArrayUtils;
 public class Vector {
 	private Object[] vector;
 
+	public Vector(double[] vector) {
+		for(double v: vector){
+			this.add(v);
+		}
+	}
+
+	public Vector(float[] vector) {
+		for(double v: vector){
+			this.add(v);
+		}
+	}
+
+	public Vector(int[] vector) {
+		for(double v: vector){
+			this.add(v);
+		}
+	}
+
+	public Vector(long[] vector) {
+		for(double v: vector){
+			this.add(v);
+		}
+	}
+
 	public void setVector(Object[] vector) {
 		this.vector = vector;
 	}
@@ -91,11 +115,14 @@ public class Vector {
 		return this.vector.length;
 	}
 
-	public Vector normalize(Vector bigger) {
-		Vector temp = new Vector(bigger.getVector());
-		for (Object obj : vector) {
-			if (bigger.includes(obj)) {
-
+	public double[] normalize(Vector bigger) {
+		double[] temp = new double[bigger.size()];
+		for(int i=0; i < temp.length; i++) {
+			temp[i] = 0;
+		}
+		for(int i=0; i < this.size(); i++){
+			if(bigger.includes(this.get(i))){
+				temp[bigger.indexOf(this.get(i))] = 1;
 			}
 		}
 		return temp;
