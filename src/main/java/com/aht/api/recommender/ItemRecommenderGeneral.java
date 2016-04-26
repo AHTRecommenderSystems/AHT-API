@@ -16,7 +16,7 @@ public class ItemRecommenderGeneral implements ItemRecommender {
 		return topNRecommendations;
 	}
 
-	public Set<Item> getTopNRecommendationByUSer(User user, int N) {
+	public Set<Item> getTopNRecommendationByUser(User user, int N) {
 		return null;
 	}
 
