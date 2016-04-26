@@ -14,12 +14,12 @@ public class ItemRecommenderGeneral implements ItemRecommender {
     public Set<Item> getTopNRecommendationByItem(Item item, int N) {
         Set<Item> topNRecommendations = new HashSet<Item>();
         for(Characteristic characteristic : item.getCharacteristics()){
-            System.out.println(characteristic.getItems());
+            System.out.println(characteristic.getName() + "\t" + characteristic.getItems());
         }
         return topNRecommendations;
     }
 
-    public Set<Item> getTopNRecommendationByUSer(User user, int N) {
+    public Set<Item> getTopNRecommendationByUser(User user, int N) {
         return null;
     }
 
@@ -27,11 +27,11 @@ public class ItemRecommenderGeneral implements ItemRecommender {
         return null;
     }
 
-    public Set<Item> getUniqueRecommendationByItem(Item item, int N) {
+    public Item getUniqueRecommendationByItem(Item item) {
         return null;
     }
 
-    public Set<Item> getTopNRecommendations(int N) {
+    public Item getUniqueRecommendationByUser(User user) {
         return null;
     }
 }

@@ -28,7 +28,7 @@ public class ItemRecommenderNeo4j implements ItemRecommender{
         return topNRecommendations;
     }
 
-    public Set<Item> getTopNRecommendationByUSer(User user, int N) {
+    public Set<Item> getTopNRecommendationByUser(User user, int N) {
         Set<Neighbor> neighbors = user.getNeighbors();
         // Sort Affinities
 
@@ -57,11 +57,11 @@ public class ItemRecommenderNeo4j implements ItemRecommender{
         return null;
     }
 
-    public Set<Item> getUniqueRecommendationByItem(Item item, int N) {
+    public Item getUniqueRecommendationByItem(Item item) {
         return null;
     }
 
-    public Set<Item> getTopNRecommendations(int N) {
+    public Item getUniqueRecommendationByUser(User user) {
         return null;
     }
 }
