@@ -5,9 +5,6 @@ import com.aht.api.model.node.User;
 
 import java.util.Set;
 
-/**
- * Created by azu on 20/04/16.
- */
 public interface ItemRecommender {
     public Set<Item> getTopNRecommendationByItem(Item item, int N);
     public Set<Item> getTopNRecommendationByUser(User user, int N);

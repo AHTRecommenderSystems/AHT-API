@@ -1,21 +1,17 @@
 package com.aht.api.evaluator;
 
-import com.aht.api.model.node.Characteristic;
 import com.aht.api.model.node.Item;
 import com.aht.api.model.node.User;
 import com.aht.api.evaluator.dataStructure.Vector;
-
-import java.util.*;
-
-/**
- * Created by azu on 20/04/16.
- */
+import java.util.Set;
+import com.aht.api.model.node.Characteristic;
 
 /**
  * Manhattan Length
  * Creates an Evaluator to get the distance between two items or users. The most distance, the most different they are between them.
  */
-public class ManhattanLength implements Evaluator{
+
+public class ManhattanLength {
     /**
      * Returns a integer distance between two items. The most distance, the most different they are.
      * @param firstItem
@@ -61,8 +57,8 @@ public class ManhattanLength implements Evaluator{
      * @return Object[] characteristics
      */
     private Object[] getCharacteristicsVector(Item item){
-        Set<Characteristic> categories = item.getCharacteristics();
-        Object[] vector = new Object[item.getCharacteristics().size()];
+        Set<Characteristic> categories = item.getModelCharacteristics();
+        Object[] vector = new Object[item.getModelCharacteristics().size()];
 
         for(int i=0; i < categories.size(); i++){
             vector[i] = categories.toArray(new Characteristic[categories.size()])[i].getId();
