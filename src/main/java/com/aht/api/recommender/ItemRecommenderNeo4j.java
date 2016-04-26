@@ -1,7 +1,11 @@
 package com.aht.api.recommender;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
+
+import com.aht.api.evaluator.ManhattanLength;
 import com.aht.api.model.node.Item;
 import com.aht.api.model.node.User;
 import com.aht.api.model.relationship.Event;
@@ -25,16 +29,18 @@ public class ItemRecommenderNeo4j implements ItemRecommender{
         return topNRecommendations;
     }
 
-    public Set<Item> getTopNRecommendationByUSer(User user, int N) {
+    public Set<Item> getTopNRecommendationByUser(User user, int N) {
+        ManhattanLength manhattanLength = new ManhattanLength();
         Set<Neighbor> neighbors = user.getModelNeighbors();
-        // Sort Affinities
-
-        Set<User> users = new HashSet<User>();
+        // TODO: Sort neighbors
+        List<User> users = new ArrayList<User>();
+        List<Object> values = new ArrayList<Object>();
         for (Neighbor neighbor: neighbors) {
             User temp = neighbor.getFirstUser();
-            if(temp.getId() == user.getId()){
+            if(temp.getId() == user.getId()) {
                 temp = neighbor.getSecondUser();
             }
+            values.add(manhattanLength.getEvaluationForUsers(user, temp));
             users.add(temp);
         }
 
