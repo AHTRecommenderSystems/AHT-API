@@ -17,9 +17,9 @@ public class ManhattanLength {
      * Returns a integer distance between two items. The most distance, the most different they are.
      * @param firstItem
      * @param secondItem
-     * @return int evaluation
+     * @return double evaluation
      */
-    public Object getEvaluationForItems(Item firstItem, Item secondItem) {
+    public double getEvaluationForItems(Item firstItem, Item secondItem) {
         Vector vector1 = new Vector(getCharacteristicsVector(firstItem));
         Vector vector2 = new Vector(getCharacteristicsVector(secondItem));
         Vector both = new Vector(vector1.merge(vector2));
@@ -38,9 +38,9 @@ public class ManhattanLength {
      * Gets an integer distance between two users. The most distance, the most different they are.
      * @param firstUser
      * @param secondUser
-     * @return int evaluation
+     * @return double evaluation
      */
-    public Object getEvaluationForUsers(User firstUser, User secondUser){
+    public double getEvaluationForUsers(User firstUser, User secondUser){
         Vector vector1 = new Vector(getItemsVector(firstUser));
         Vector vector2 = new Vector(getItemsVector(secondUser));
         Vector both = new Vector(vector1.merge(vector2));
