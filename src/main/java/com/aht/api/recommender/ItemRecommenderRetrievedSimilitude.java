@@ -1,9 +1,6 @@
 package com.aht.api.recommender;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.*;
 
 import com.aht.api.evaluator.ManhattanLength;
 import com.aht.api.model.node.Item;
@@ -14,9 +11,9 @@ import com.aht.api.model.relationship.Neighbor;
 
 
 public class ItemRecommenderRetrievedSimilitude implements ItemRecommender{
-    public Set<Item> getTopNRecommendationByItem(Item item, int N) {
-        Set<Item> topNRecommendations = new HashSet<Item>();
-        Set<Affinity> affinities = item.getModelAffinities();
+    public List<Item> getTopNRecommendationByItem(Item item, int N) {
+        List<Item> topNRecommendations = new LinkedList<Item>();
+        List<Affinity> affinities = item.getModelAffinities();
         // Sort Affinities
 
         for (Affinity affinity: affinities) {
@@ -29,9 +26,9 @@ public class ItemRecommenderRetrievedSimilitude implements ItemRecommender{
         return topNRecommendations;
     }
 
-    public Set<Item> getTopNRecommendationByUser(User user, int N) {
+    public List<Item> getTopNRecommendationByUser(User user, int N) {
         ManhattanLength manhattanLength = new ManhattanLength();
-        Set<Neighbor> neighbors = user.getModelNeighbors();
+        List<Neighbor> neighbors = user.getModelNeighbors();
         // TODO: Sort neighbors
         List<User> users = new ArrayList<User>();
         List<Object> values = new ArrayList<Object>();
@@ -44,10 +41,10 @@ public class ItemRecommenderRetrievedSimilitude implements ItemRecommender{
             users.add(temp);
         }
 
-        Set<Item> topNRecommendations = new HashSet<Item>();
+        List<Item> topNRecommendations = new LinkedList<Item>();
         for(User u: users){
             // getList of items by user event sorted by value
-            Set<Event> events = u.getModelEvents();
+            List<Event> events = u.getModelEvents();
             for(Event e: events){
                 Item temp = e.getModelItem();
                 topNRecommendations.add(temp);
@@ -56,7 +53,7 @@ public class ItemRecommenderRetrievedSimilitude implements ItemRecommender{
         return topNRecommendations;
     }
 
-    public Set<Item> getTopNRecommendationByItemSet(Set<Item> items, int N) {
+    public List<Item> getTopNRecommendationByItemSet(List<Item> items, int N) {
         return null;
     }
 

@@ -20,27 +20,18 @@ public class ManhattanLength implements Evaluator{
      * @param secondItem
      * @return int evaluation
      */
-    public Object getEvaluationForItems(Item firstItem, Item secondItem) {
+    public double getEvaluationForItems(Item firstItem, Item secondItem) {
         Vector vector1 = new Vector(getCharacteristicsVector(firstItem));
         Vector vector2 = new Vector(getCharacteristicsVector(secondItem));
         Vector both = new Vector(vector1.merge(vector2));
         double[] normalized1 = vector1.normalize(both);
         double[] normalized2 = vector2.normalize(both);
-        int distance = 0;
+        double distance = 0;
         for(int i=0; i < normalized1.length; i++){
             distance += Math.abs(normalized1[i] - normalized2[i]);
         }
-        
-        // normalized1.length & normalized2.length are aquals
-        double euclidean_distance = 0; 
-        for(int i = 0; i < normalized1.length; i++) 
-        	euclidean_distance += (normalized1[i] - normalized2[i]) * (normalized1[i] - normalized2[i]);
-        euclidean_distance = Math.sqrt(euclidean_distance);
 
-        
-        
-        double result = ((double)both.size() - (double) distance) / (double) both.size();
-        System.out.println("Distancia entre los dos: " + result);
+        double result =  distance / (double) normalized1.length;
         return result;
     }
 
@@ -50,19 +41,39 @@ public class ManhattanLength implements Evaluator{
      * @param secondUser
      * @return int evaluation
      */
-    public Object getEvaluationForUsers(User firstUser, User secondUser){
+    public double getEvaluationForUsers(User firstUser, User secondUser){
         Vector vector1 = new Vector(getItemsVector(firstUser));
         Vector vector2 = new Vector(getItemsVector(secondUser));
         Vector both = new Vector(vector1.merge(vector2));
-        int common = 0;
-        for(Object value : vector1.getVector()){
-            if(vector2.includes(value)){
-                common += 1;
-            }
+        double[] normalized1 = vector1.normalize(both);
+        double[] normalized2 = vector2.normalize(both);
+        // normalized1.length & normalized2.length are aquals
+
+        double distance = 0;
+        for(int i=0; i < normalized1.length; i++){
+            distance += Math.abs(normalized1[i] - normalized2[i]);
         }
-        double result = ((double)both.size() - (double) common) / (double) both.size();
-        System.out.println("Distancia entre los dos: " + result);
-        return result;
+        double ratedTheSame =  distance / (double) normalized1.length;
+
+        //If both users have rated exactly the same items, or there's no intersection they cannot be possibilities to recommend
+        if(ratedTheSame == 0 || ratedTheSame == 1)
+            return 1; //Worst posible value
+        else {
+            Vector values1 = new Vector(getValuesVector(firstUser));
+            Vector values2 = new Vector(getValuesVector(secondUser));
+            for(int i=0; i < both.size(); i++){
+                Object idx = both.get(i);
+                normalized1[i] = normalized1[i] * Double.parseDouble(values1.get(vector1.indexOf(idx)).toString());
+                normalized2[i] = normalized2[i] * Double.parseDouble(values2.get(vector2.indexOf(idx)).toString());
+            }
+            distance = 0;
+            for(int i=0; i < normalized1.length; i++){
+                distance += Math.abs(normalized1[i] - normalized2[i]);
+            }
+
+            double result =  distance / (double) normalized1.length;
+            return  result;
+        }
     }
 
     /**
@@ -90,6 +101,15 @@ public class ManhattanLength implements Evaluator{
         Vector vector = new Vector(new Object[events.size()]);
         for(Event event: events) {
             vector.add(event.getModelItem().getModelId());
+        }
+        return vector.getVector();
+    }
+
+    private Object[] getValuesVector(User user){
+        List<Event> events = user.getModelEvents();
+        Vector vector = new Vector(new Object[events.size()]);
+        for(Event event: events) {
+            vector.add(event.getModelValue());
         }
         return vector.getVector();
     }
