@@ -2,6 +2,7 @@ package com.aht.api.model.node;
 
 import com.aht.api.model.relationship.Affinity;
 import com.aht.api.model.relationship.Event;
+
 import java.util.List;
 
 public interface Item {

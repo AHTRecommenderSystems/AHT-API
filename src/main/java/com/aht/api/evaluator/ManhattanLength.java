@@ -18,9 +18,9 @@ public class ManhattanLength implements Evaluator{
      * Returns a integer distance between two items. The most distance, the most different they are.
      * @param firstItem
      * @param secondItem
-     * @return double evaluation
+     * @return int evaluation
      */
-    public double getEvaluationForItems(Item firstItem, Item secondItem) {
+    public Object getEvaluationForItems(Item firstItem, Item secondItem) {
         Vector vector1 = new Vector(getCharacteristicsVector(firstItem));
         Vector vector2 = new Vector(getCharacteristicsVector(secondItem));
         Vector both = new Vector(vector1.merge(vector2));
@@ -30,6 +30,15 @@ public class ManhattanLength implements Evaluator{
         for(int i=0; i < normalized1.length; i++){
             distance += Math.abs(normalized1[i] - normalized2[i]);
         }
+        
+        // normalized1.length & normalized2.length are aquals
+        double euclidean_distance = 0; 
+        for(int i = 0; i < normalized1.length; i++) 
+        	euclidean_distance += (normalized1[i] - normalized2[i]) * (normalized1[i] - normalized2[i]);
+        euclidean_distance = Math.sqrt(euclidean_distance);
+
+        
+        
         double result = ((double)both.size() - (double) distance) / (double) both.size();
         System.out.println("Distancia entre los dos: " + result);
         return result;
@@ -39,9 +48,9 @@ public class ManhattanLength implements Evaluator{
      * Gets an integer distance between two users. The most distance, the most different they are.
      * @param firstUser
      * @param secondUser
-     * @return double evaluation
+     * @return int evaluation
      */
-    public double getEvaluationForUsers(User firstUser, User secondUser){
+    public Object getEvaluationForUsers(User firstUser, User secondUser){
         Vector vector1 = new Vector(getItemsVector(firstUser));
         Vector vector2 = new Vector(getItemsVector(secondUser));
         Vector both = new Vector(vector1.merge(vector2));

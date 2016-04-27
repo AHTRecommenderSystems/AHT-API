@@ -67,4 +67,5 @@ public class ItemRecommenderRetrievedSimilitude implements ItemRecommender{
     public Item getUniqueRecommendationByUser(User user) {
         return null;
     }
+
 }

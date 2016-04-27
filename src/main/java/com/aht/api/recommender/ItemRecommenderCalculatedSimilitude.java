@@ -1,18 +1,18 @@
 package com.aht.api.recommender;
 
-import java.util.Set;
-import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 
+import com.aht.api.evaluator.Evaluator;
 import com.aht.api.evaluator.ManhattanLength;
 import com.aht.api.model.node.Item;
 import com.aht.api.model.node.User;
 import com.aht.api.model.node.Characteristic;
 
 public class ItemRecommenderCalculatedSimilitude implements ItemRecommender {
-	ManhattanLength evaluator = new ManhattanLength();
-
-	public Set<Item> getTopNRecommendationByItem(Item item, int N) {
-		Set<Item> topNRecommendations = new HashSet<Item>();
+	private Evaluator evaluator = new ManhattanLength();
+	public List<Item> getTopNRecommendationByItem(Item item, int N) {
+		List<Item> topNRecommendations = new LinkedList<Item>();
 		for (Characteristic characteristic : item.getModelCharacteristics()) {
 			for(Item neighbor: characteristic.getModelItems()){
 				double value = evaluator.getEvaluationForItems(item, neighbor);
@@ -22,19 +22,19 @@ public class ItemRecommenderCalculatedSimilitude implements ItemRecommender {
 		return topNRecommendations;
 	}
 
-	public Set<Item> getTopNRecommendationByUser(User user, int N) {
+	public List<Item> getTopNRecommendationByUser(User user, int N) {
 		return null;
 	}
 
-	public Set<Item> getTopNRecommendationByItemSet(Set<Item> items, int N) {
+	public List<Item> getTopNRecommendationByItemSet(List<Item> items, int N) {
 		return null;
 	}
 
-  public Item getUniqueRecommendationByItem(Item item) {
-      return null;
-  }
+	public Item getUniqueRecommendationByItem(Item item) {
+		  return null;
+	  }
 
-  public Item getUniqueRecommendationByUser(User user) {
-      return null;
-  }
+	public Item getUniqueRecommendationByUser(User user) {
+		  return null;
+	  }
 }
