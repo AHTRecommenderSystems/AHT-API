@@ -1,10 +1,8 @@
 package com.aht.api.model.node;
 
-import java.util.Set;
+import java.util.List;
 
 public interface Characteristic {
-	public Object getId();
-	public String getName();
-	public void setName(String name);
-	public Set<Item> getItems();
+	public Object getModelId();
+	public List<Item> getModelItems();
 }

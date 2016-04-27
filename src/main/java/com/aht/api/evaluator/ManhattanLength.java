@@ -1,17 +1,18 @@
 package com.aht.api.evaluator;
 
+import com.aht.api.evaluator.dataStructure.Vector;
+import com.aht.api.model.node.Characteristic;
 import com.aht.api.model.node.Item;
 import com.aht.api.model.node.User;
-import com.aht.api.evaluator.dataStructure.Vector;
-import java.util.Set;
-import com.aht.api.model.node.Characteristic;
 import com.aht.api.model.relationship.Event;
+
+import java.util.List;
 
 /**
  * Manhattan Length
  * Creates an Evaluator to get the distance between two items or users. The most distance, the most different they are between them.
  */
-public class ManhattanLength {
+public class ManhattanLength implements Evaluator{
 
     /**
      * Returns a integer distance between two items. The most distance, the most different they are.
@@ -61,11 +62,11 @@ public class ManhattanLength {
      * @return Object[] characteristics identifiers
      */
     private Object[] getCharacteristicsVector(Item item){
-        Set<Characteristic> categories = item.getModelCharacteristics();
+        List<Characteristic> characteristics = item.getModelCharacteristics();
         Object[] vector = new Object[item.getModelCharacteristics().size()];
 
-        for(int i=0; i < categories.size(); i++){
-            vector[i] = categories.toArray(new Characteristic[categories.size()])[i].getId();
+        for(int i=0; i < characteristics.size(); i++){
+            vector[i] = characteristics.toArray(new Characteristic[characteristics.size()])[i].getModelId();
         }
         return vector;
     }
@@ -76,10 +77,10 @@ public class ManhattanLength {
      * @return Object[] items identifiers
      */
     private Object[] getItemsVector(User user){
-        Set<Event> events = user.getModelEvents();
+        List<Event> events = user.getModelEvents();
         Vector vector = new Vector(new Object[events.size()]);
         for(Event event: events) {
-            vector.add(event.getItem().getId());
+            vector.add(event.getModelItem().getModelId());
         }
         return vector.getVector();
     }

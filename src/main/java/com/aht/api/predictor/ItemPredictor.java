@@ -7,5 +7,5 @@ import com.aht.api.model.node.User;
  * Created by azu on 24/04/16.
  */
 public interface ItemPredictor {
-    public Object predictValue(User user, Item item);
+    public double predictValue(User user, Item item);
 }

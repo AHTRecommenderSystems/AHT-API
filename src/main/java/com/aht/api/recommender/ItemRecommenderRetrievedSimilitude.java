@@ -13,16 +13,16 @@ import com.aht.api.model.relationship.Affinity;
 import com.aht.api.model.relationship.Neighbor;
 
 
-public class ItemRecommenderNeo4j implements ItemRecommender{
+public class ItemRecommenderRetrievedSimilitude implements ItemRecommender{
     public Set<Item> getTopNRecommendationByItem(Item item, int N) {
         Set<Item> topNRecommendations = new HashSet<Item>();
         Set<Affinity> affinities = item.getModelAffinities();
         // Sort Affinities
 
         for (Affinity affinity: affinities) {
-            Item temp = affinity.getFirstItem();
-            if(temp.getId() == item.getId()){
-                temp = affinity.getSecondItem();
+            Item temp = affinity.getFirstModelItem();
+            if(temp.getModelId() == item.getModelId()){
+                temp = affinity.getSecondModelItem();
             }
             topNRecommendations.add(temp);
         }
@@ -36,9 +36,9 @@ public class ItemRecommenderNeo4j implements ItemRecommender{
         List<User> users = new ArrayList<User>();
         List<Object> values = new ArrayList<Object>();
         for (Neighbor neighbor: neighbors) {
-            User temp = neighbor.getFirstUser();
-            if(temp.getId() == user.getId()) {
-                temp = neighbor.getSecondUser();
+            User temp = neighbor.getFirstModelUser();
+            if(temp.getModelId() == user.getModelId()) {
+                temp = neighbor.getSecondModelUser();
             }
             values.add(manhattanLength.getEvaluationForUsers(user, temp));
             users.add(temp);
@@ -49,7 +49,7 @@ public class ItemRecommenderNeo4j implements ItemRecommender{
             // getList of items by user event sorted by value
             Set<Event> events = u.getModelEvents();
             for(Event e: events){
-                Item temp = e.getItem();
+                Item temp = e.getModelItem();
                 topNRecommendations.add(temp);
             }
         }
