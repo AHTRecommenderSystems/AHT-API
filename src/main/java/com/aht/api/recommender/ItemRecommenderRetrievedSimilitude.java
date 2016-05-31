@@ -30,8 +30,10 @@ public class ItemRecommenderRetrievedSimilitude implements ItemRecommender{
             if(temp.getModelId() == item.getModelId()){
                 temp = affinity.getSecondModelItem();
             }
-            i++;
-            topNRecommendations.add(temp);
+            if(!topNRecommendations.contains(temp)){
+                i++;
+                topNRecommendations.add(temp);
+            }
             if(i == N){
                 break;
             }
@@ -80,8 +82,10 @@ public class ItemRecommenderRetrievedSimilitude implements ItemRecommender{
             int i = 0;
             for(Event e: events){
                 Item temp = e.getModelItem();
-                i++;
-                topNRecommendations.add(temp);
+                if(!topNRecommendations.contains(temp)){
+                    i++;
+                    topNRecommendations.add(temp);
+                }
                 if(i == N)
                     break;
             }
@@ -116,8 +120,11 @@ public class ItemRecommenderRetrievedSimilitude implements ItemRecommender{
         });
         int i = 0;
         for(Wrapper wrapper : wrappers){
-            i++;
-            recommendations.add(wrapper.getItem());
+            Item temp = wrapper.getItem();
+            if(!recommendations.contains(temp)){
+                i++;
+                recommendations.add(temp);
+            }
             if(i == N)
                 break;
         }
